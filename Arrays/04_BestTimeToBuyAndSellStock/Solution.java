@@ -77,7 +77,7 @@ class Solution {
         int n = prices.length;
         
         int maxProfit = 0;
-        int minBuyingPrice = prices[0];
+        int minBuyingPrice = prices[0]; // minBuyingPriceSoFar
         for(int sellingDay = 1 ; sellingDay < n ; sellingDay++) {
             // Update maxProfit
             int currProfit = prices[sellingDay] - minBuyingPrice;
