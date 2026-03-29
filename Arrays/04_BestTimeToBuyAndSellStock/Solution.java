@@ -71,9 +71,28 @@ class Solution {
         return maxProfit;
     }
 
+    // In all before solutions we tried to obtain the maxSellingPrice for a given "day i"(buyingDay).
+    // In this solution we try to obtain the minBuyingPrice for a given "day i"(sellingDay).
+    public int bestTwo(int[] prices) {
+        int n = prices.length;
+        
+        int maxProfit = 0;
+        int minBuyingPrice = prices[0];
+        for(int sellingDay = 1 ; sellingDay < n ; sellingDay++) {
+            // Update maxProfit
+            int currProfit = prices[sellingDay] - minBuyingPrice;
+            maxProfit = Math.max(currProfit, maxProfit);
+
+            // Update minBuyingPrice
+            minBuyingPrice = Math.min(prices[sellingDay], minBuyingPrice);
+        }
+        return maxProfit;
+    }
+
     public int maxProfit(int[] prices) {
         // return brute(prices);
         // return better(prices);
-        return best(prices);
+        // return best(prices);
+        return bestTwo(prices);
     }
 }
