@@ -54,8 +54,26 @@ class Solution {
         return maxProfit;
     }
 
+    public int best(int[] prices) {
+        int n = prices.length;
+
+        int maxProfit = 0;
+        int maxSellingPrice = prices[n-1]; // Denotes the maximum price seen so far
+        for(int buyDay = n - 2; buyDay >= 0 ; buyDay--) {
+            // Update maxProfit
+            int currProfit = maxSellingPrice - prices[buyDay];
+            maxProfit = Math.max(currProfit, maxProfit);
+
+            // Update maxSellingPrice
+            maxSellingPrice = Math.max(maxSellingPrice, prices[buyDay]);
+        }
+
+        return maxProfit;
+    }
+
     public int maxProfit(int[] prices) {
         // return brute(prices);
-        return better(prices);
+        // return better(prices);
+        return best(prices);
     }
 }
