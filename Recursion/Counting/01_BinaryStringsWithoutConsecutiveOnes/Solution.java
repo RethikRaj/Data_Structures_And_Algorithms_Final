@@ -4,6 +4,7 @@ You are given an integer ‘N’, you need to find the count of binary strings o
  */
 
 public class Solution {
+    // Fib series starting with 2 & 3
     public static int solutionOne(int n) {
         if (n == 1) return 2;
         if (n == 2) return 3;
@@ -12,7 +13,7 @@ public class Solution {
     }
 
     // Using include/exclude pattern
-    public static int solutionTwo(int n, int lastBit) {
+    public static int solutionTwo(int n, int prevBit) {
         // Base case: all bits placed, valid string found
         if (n == 0) return 1;
 
@@ -21,7 +22,7 @@ public class Solution {
         count += solutionTwo(n-1, 0);
 
         // We can include one only when lastBit != 1 (that is either no last bit or lastbit == 0)
-        if(lastBit != 1) {
+        if(prevBit != 1) {
             count += solutionTwo(n-1, 1);
         }
         return count;
