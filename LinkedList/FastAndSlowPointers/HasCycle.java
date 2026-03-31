@@ -13,7 +13,7 @@ import java.util.Set;
  * }
  */
 class Solution {
-    // Brute Approach (Using hash table)
+    // Brute Approach (Using hash set)
     public boolean brute(ListNode head) {
         Set<ListNode> visited = new HashSet<>();
         ListNode current = head;

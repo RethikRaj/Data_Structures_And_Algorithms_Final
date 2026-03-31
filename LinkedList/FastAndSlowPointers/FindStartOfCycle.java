@@ -10,7 +10,7 @@
  * }
  */
 class Solution {
-    // Brute : using hash table
+    // Brute : using hash set
     public ListNode brute(ListNode head) {
         Set<ListNode> visited = new HashSet<>();
         ListNode current = head;
