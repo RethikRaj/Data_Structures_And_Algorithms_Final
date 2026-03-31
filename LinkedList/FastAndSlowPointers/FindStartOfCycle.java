@@ -10,7 +10,24 @@
  * }
  */
 class Solution {
-    public ListNode detectCycle(ListNode head) {
+    // Brute : using hash table
+    public ListNode brute(ListNode head) {
+        Set<ListNode> visited = new HashSet<>();
+        ListNode current = head;
+
+        while(current != null) {
+            // Check if current node is already present
+            if(visited.contains(current)) {
+                return current;
+            }
+            visited.add(current);
+            current = current.next;
+        }
+        return null;
+    }
+
+    // best : slow and fast pointer
+    public ListNode best(ListNode head) {
         ListNode slow = head;
         ListNode fast = head;
 
@@ -32,5 +49,10 @@ class Solution {
         
         // Fast reached end of LL => No cycle.
         return null;  
+    }
+
+    public ListNode detectCycle(ListNode head) {
+        // return brute(head);
+        return best(head);
     }
 }
