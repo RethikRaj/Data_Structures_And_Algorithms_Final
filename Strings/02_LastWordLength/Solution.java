@@ -1,5 +1,5 @@
 class Solution {
-    // Approach 1 : Using inbuilt methods
+    // Approach 1 : Using inbuilt methods , TC : O(n), SC :O(n)->split()
     public int approachOne(String s) {
         // 1. Trim spaces before the first character and after the last character
         s = s.trim();
@@ -10,7 +10,7 @@ class Solution {
         return index >= 0 ? arr[index].length() : 0;
     }
 
-    // Approach 2 : Dry run 
+    // Approach 2 : Dry run : TC : O(n), SC:O(1)
     public int approachTwo(String s) {
         int n = s.length();
 
@@ -38,7 +38,7 @@ class Solution {
         return 0;
     }
 
-    // Best approach : Traverse from end
+    // Best approach : Traverse from end : TC : O(n), SC:O(1)
     public int best(String s) {
         int last = s.length() - 1;
 
