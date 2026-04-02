@@ -4,6 +4,7 @@ public class FrogJumpHeights {
      * Approach 1: (forward direction)
      * f(N, heights, currStone) -> returns the minimum cost to reach Nth stone from last stone.
      */
+    // After reaching Code you might have a doubt , that why didn't i check if the rec value is Integer.MAX_VALUE or not ? it is because path1Cost always exist and thus Integer.MAX_VALUE is never returned.
     public static int f(int N, int[] heights, int currStone) {
         // Base case: frog has reached the destination, no more cost
         if (currStone == N) return 0;
