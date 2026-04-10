@@ -8,7 +8,7 @@ class Solution {
         ArrayDeque<Integer> stack = new ArrayDeque<>();
         for(int i = 0 ; i < n; i++) {
             while(!stack.isEmpty() && heights[i] < heights[stack.peek()]) {
-                nseIndexes[stack.peek()] = i;
+                nseIndexes[stack.peek()] = i; // Store index becuase i need index to calculate width
                 stack.pop();
             }
             stack.push(i);
@@ -26,7 +26,7 @@ class Solution {
         ArrayDeque<Integer> stack = new ArrayDeque<>();
         for(int i = n - 1; i >= 0 ; i--) {
             while(!stack.isEmpty() && heights[i] < heights[stack.peek()]) {
-                pseIndexes[stack.peek()] = i;
+                pseIndexes[stack.peek()] = i; // Store index becuase i need index to calculate width
                 stack.pop();
             }
             stack.push(i);
