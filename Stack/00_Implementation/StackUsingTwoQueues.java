@@ -22,7 +22,7 @@ class MyStackOptimal {
             q.offer(q.poll());
             count -= 1;
         }
-        // Now the top element will be the last inserted element => Pop, push -O(1)
+        // Now the top element will be the last inserted element => Pop, push - O(1)
     }
     
     public int pop() {
