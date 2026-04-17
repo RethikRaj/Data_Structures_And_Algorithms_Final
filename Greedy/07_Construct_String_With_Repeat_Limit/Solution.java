@@ -12,6 +12,7 @@ class Solution {
     // Brute Force : Find all subsequences and then find the lexicographically largest with repeatLimit constraint
 
     // Better : Using priority Queues
+    // TC : O(n log k) , SC : O(1) only 26 letters
     public String better(String s, int repeatLimit) {
         // Count frequency of each character
         Map<Character, Integer> freqMap = new HashMap<>();
@@ -62,6 +63,7 @@ class Solution {
     }
 
     // Best : Using Arrays : Only 26 letters
+    // TC : O(n) , SC : O(1)
     public String best(String s, int repeatLimit) {
         int[] freqMap = new int[26];
         for(char c : s.toCharArray()) freqMap[c - 'a'] += 1;
