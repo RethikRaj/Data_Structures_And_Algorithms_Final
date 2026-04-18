@@ -5,7 +5,7 @@ class Solution {
     // Strategy : Greedy Grouping
      /* Core Insight:
         - If a rabbit says "X", it means X+1 rabbits (including itself) share the same color.
-        - Rabbits saying the same number CAN belong to the same color group.
+        - Since we need minimum , we will be optimisitic : Rabbits saying the same number CAN belong to the same color group.
         - But a group can hold at most (X+1) rabbits saying "X".
         - If more than (X+1) rabbits say "X", they must form a NEW separate group.
     */
