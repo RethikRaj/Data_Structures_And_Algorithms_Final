@@ -1,59 +1,49 @@
 public class FrogJumpHeights {
 
     /**
-     * Approach 1: (forward direction)
-     * f(N, heights, currStone) -> returns the minimum cost to reach Nth stone from last stone.
+     * Forward recursion: min cost to reach the last stone from index i.
+     * At each step, try jumping +1 or +2; pick the cheaper path.
+     * TC: O(2^n) — overlapping subproblems, no memoization yet.
      */
-    // After reaching Code you might have a doubt , that why didn't i check if the rec value is Integer.MAX_VALUE or not ? it is because path1Cost always exist and thus Integer.MAX_VALUE is never returned.
-    public static int f(int N, int[] heights, int currStone) {
-        // Base case: frog has reached the destination, no more cost
-        if (currStone == N) return 0;
+    public static int f(int i, int[] heights) {
+        if (i == heights.length - 1) return 0; // already at destination
 
-        // Option 1: Jump 1 step forward
-        int path1Cost = f(N, heights, currStone + 1) + Math.abs(heights[currStone] - heights[currStone + 1]);
+        // jump +1 always valid
+        int path1 = f(i + 1, heights) + Math.abs(heights[i] - heights[i + 1]);
 
-        // Option 2: Jump 2 steps forward (only if the target index exists)
-        int path2Cost = Integer.MAX_VALUE; // !Why Integer.MAX_VALUE ? Because we are taking minimum , so an impossible case shld return Integer.Max_VALUE.
-        if (currStone + 2 < heights.length) {
-            path2Cost = f(N, heights, currStone + 2)+ Math.abs(heights[currStone] - heights[currStone + 2]);
+        // jump +2 only if within bounds
+        int path2 = Integer.MAX_VALUE; // sentinel: treat out-of-bounds as infinitely costly
+        if (i + 2 < heights.length) {
+            path2 = f(i + 2, heights) + Math.abs(heights[i] - heights[i + 2]);
         }
 
-        // Return the minimum cost among both options
-        return Math.min(path1Cost, path2Cost);
+        return Math.min(path1, path2);
     }
 
     /**
-     * Approach 2: (backward direction)
-     * Starts from stone N and recurses backward toward stone 1.
-     * f(N, heights) -> returns the minimum cost to reach Nth stone from 1st stone.
+     * Backward recursion: min cost to reach stone i from stone 0.
+     * Same logic as f(), but builds the answer from the destination back to the source.
+     * TC: O(2^n) — overlapping subproblems, no memoization yet.
      */
-    public static int f(int N, int[] heights) {
-        // Base case: frog is already at stone 1, no cost needed
-        if (N == 1) return 0;
+    public static int g(int i, int[] heights) {
+        if (i == 0) return 0; // cost to reach start from start is zero
 
-        // Option 1: Frog came from stone N-1 (1-step jump)
-        int path1Cost = f(N - 1, heights) + Math.abs(heights[N] - heights[N - 1]);
+        // came from i-1 (always valid)
+        int path1 = g(i - 1, heights) + Math.abs(heights[i] - heights[i - 1]);
 
-        // Option 2: Frog came from stone N-2 (2-step jump), only valid if N > 2
-        //           N == 2 would mean coming from stone 0, which doesn't exist
-        int path2Cost = Integer.MAX_VALUE; // !Why Integer.MAX_VALUE ? Because we are taking minimum , so an impossible case shld return Integer.Max_VALUE.
-        if (N > 2) {
-            path2Cost = f(N - 2, heights) + Math.abs(heights[N] - heights[N - 2]);
+        // came from i-2 (only if it exists)
+        int path2 = Integer.MAX_VALUE;
+        if (i - 2 >= 0) {
+            path2 = g(i - 2, heights) + Math.abs(heights[i] - heights[i - 2]);
         }
 
-        // Return the minimum cost among both options
-        return Math.min(path1Cost, path2Cost);
+        return Math.min(path1, path2);
     }
 
     public static void main(String[] args) {
-        int N = 4;
-        // Heights are 1-indexed; index 0 is unused/ignored
-        int[] heights = {-1, 10, 30, 40, 20};
+        int[] heights = {10, 30, 40, 20};
 
-        // Approach 1: forward recursion starting from stone 1
-        System.out.println(f(N, heights, 1));
-
-        // Approach 2: backward recursion starting from stone N
-        // System.out.println(f(N, heights));
+        System.out.println(f(0, heights));                  // forward:  answer = 20
+        System.out.println(g(heights.length - 1, heights)); // backward: answer = 20
     }
 }
