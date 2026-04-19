@@ -4,9 +4,9 @@
         - Push - O(n)
         - Pop  - O(1)
         - top  - O(1)
-        - isEmpty - O(n)
+        - isEmpty - O(1)
  */
-class MyStackOptimal {
+class MyStackOptimalOne {
     Queue<Integer> q;
 
     public MyStack() {
@@ -38,6 +38,45 @@ class MyStackOptimal {
     }
 }
 
+/*
+    Single Queue :
+        - Push - O(1)
+        - Pop  - O(n)
+        - top  - O(1)
+        - isEmpty - O(1)
+ */
+class MyStackOptimalTwo {
+    private Queue<Integer> q;
+    int topEle;
+
+    public MyStack() {
+        q = new ArrayDeque<>();
+    }
+    
+    public void push(int x) {
+        q.offer(x);
+        topEle = x;
+    }
+    
+    public int pop() {
+        int size = q.size();
+        // Pop and push size - 1 times
+        for(int i = 0 ; i < size - 1 ; i++) {
+            topEle = q.poll();
+            q.offer(topEle);
+        }
+        // frontelement will be the topElement of stack
+        return q.poll();
+    }
+    
+    public int top() {
+        return topEle;
+    }
+    
+    public boolean empty() {
+        return q.isEmpty();
+    }
+}
 
 // Brute :
 // Two queues 
