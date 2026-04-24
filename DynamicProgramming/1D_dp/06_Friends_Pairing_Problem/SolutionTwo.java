@@ -58,7 +58,6 @@ public class SolutionTwo {
         return prev1;
     }
 
-
     public static int numberOfWays(int n) {
         // return (int)f(n);
 
