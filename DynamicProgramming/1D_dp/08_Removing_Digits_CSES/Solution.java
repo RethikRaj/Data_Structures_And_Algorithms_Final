@@ -28,7 +28,12 @@ public class Solution {
         for(int digit : digits) {
             minSteps = Math.min(minSteps, f(n - digit));
         }
-        return 1 + minSteps;
+        return 1 + minSteps; 
+        //! minSteps will never remain Integer.MAX_VALUE because for any n > 0,
+        // there is always at least one non-zero digit in n. That digit will be
+        // included in 'digits', ensuring at least one recursive call f(n - digit).
+        // Since (n - digit) < n, the recursion always progresses toward the base case (n == 0),
+        // guaranteeing that minSteps gets updated with a valid value.
     }
 
     public static int f_td(int n, int[] dp) {
