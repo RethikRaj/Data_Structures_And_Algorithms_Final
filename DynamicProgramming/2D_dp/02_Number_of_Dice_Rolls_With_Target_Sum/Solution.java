@@ -1,8 +1,8 @@
 class Solution {
     public static final int MOD = 1000000007;
 
-    public static final int MAX_N = 35;
-    public static final int MAX_TARGET = 1005;
+    public static final int MAX_N = 30;
+    public static final int MAX_TARGET = 1000;
 
     // TC : O( k^n ) , SC : O(n)
     public long f(int dice, int k, int target) {
@@ -38,7 +38,7 @@ class Solution {
 
     // TC : O(n * t * k) , SC : O(n*t)
     public long f_bu(int d, int k, int t) {
-        long[][] dp = new long[MAX_N][MAX_TARGET];
+        long[][] dp = new long[MAX_N + 5][MAX_TARGET + 5];
 
         // Step 2.1 :
         if(t == 0 && d == 0) return 1;
@@ -66,14 +66,14 @@ class Solution {
 
     // TC : O(n * t * k) , SC : O(t)
     public long f_bu_optimised(int d, int k, int t) {
-        long[] prevRow = new long[MAX_TARGET];
+        long[] prevRow = new long[MAX_TARGET + 5];
 
         if(t == 0 && d == 0) return 1;
         if(d == 0) return 0;
         prevRow[0] = 1;
 
         for(int dice = 1 ; dice <= d; dice++) {
-            long[] currRow = new long[MAX_TARGET];
+            long[] currRow = new long[MAX_TARGET + 5];
             for(int target = 0 ; target <= t; target++) {
                 long totalWays = 0;
 
@@ -94,7 +94,7 @@ class Solution {
     public int numRollsToTarget(int n, int k, int target) {
         // return (int)f(n, k, target);
 
-        // long[][] dp = new long[MAX_N][MAX_TARGET];
+        // long[][] dp = new long[MAX_N + 5][MAX_TARGET + 5];
         // for(long[] arr : dp) {
         //     Arrays.fill(arr, -1L);
         // }    
