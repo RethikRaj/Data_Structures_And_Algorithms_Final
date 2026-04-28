@@ -1,15 +1,16 @@
 class Solution {
-    void f(Node root) {
+    public void f(TreeNode root) {
         if(root == null) return;
-        
+
         f(root.left);
         f(root.right);
-        Node temp = root.left;
+        TreeNode temp = root.left;
         root.left = root.right;
         root.right = temp;
     }
-    
-    void mirror(Node root) {
+
+    public TreeNode invertTree(TreeNode root) {
         f(root);
+        return root;
     }
 }
