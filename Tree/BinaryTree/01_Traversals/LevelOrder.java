@@ -1,3 +1,5 @@
+import java.util.Queue;
+
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -20,7 +22,7 @@ class Solution {
         if (root == null) return ans;
 
         // BFS queue seeded with root
-        ArrayDeque<TreeNode> q = new ArrayDeque<>();
+        Queue<TreeNode> q = new ArrayDeque<>();
         q.offer(root);
 
         while (!q.isEmpty()) {

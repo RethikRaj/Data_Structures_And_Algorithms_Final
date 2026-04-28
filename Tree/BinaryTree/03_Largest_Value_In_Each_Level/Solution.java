@@ -1,3 +1,7 @@
+import java.util.Queue;
+
+import javax.swing.tree.TreeNode;
+
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -19,7 +23,7 @@ class Solution {
         
         if(root == null) return ans;
 
-        ArrayDeque<TreeNode> q = new ArrayDeque<>();
+        Queue<TreeNode> q = new ArrayDeque<>();
         q.offer(root);
 
         while(!q.isEmpty()) {
