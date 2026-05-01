@@ -91,6 +91,8 @@ public class Solution {
         return dp[0][arr.length - 1];
     }
 
+    // f_bu_2 see matrix chain multiplication.
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         

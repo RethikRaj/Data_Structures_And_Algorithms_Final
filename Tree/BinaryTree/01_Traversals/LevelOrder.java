@@ -34,7 +34,7 @@ class Solution {
                 TreeNode node = q.poll();
                 level.add(node.val);
 
-                // enqueue children for next level
+                // !enqueue children for next level only if not null.
                 if (node.left  != null) q.offer(node.left);
                 if (node.right != null) q.offer(node.right);
             }
