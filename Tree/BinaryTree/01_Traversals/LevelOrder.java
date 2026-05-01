@@ -16,6 +16,8 @@ import java.util.Queue;
  * }
  */
 class Solution {
+    // TC: O(n) - each node is enqueued and dequeued exactly once
+    // SC: O(n) - deque holds at most O(w) nodes where w is max width (≤ n/2 for last level)
     public List<List<Integer>> levelOrder(TreeNode root) {
         List<List<Integer>> ans = new ArrayList<>();
 
