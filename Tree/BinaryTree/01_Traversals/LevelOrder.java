@@ -28,11 +28,11 @@ class Solution {
         q.offer(root);
 
         while (!q.isEmpty()) {
-            int size = q.size();          // nodes at current level
+            int levelSize = q.size();          // nodes at current level
             List<Integer> level = new ArrayList<>();
 
             // Process elements of one level of the tree.
-            for (int i = 0; i < size; i++) {
+            for (int i = 0; i < levelSize; i++) {
                 TreeNode node = q.poll();
                 level.add(node.val);
 
