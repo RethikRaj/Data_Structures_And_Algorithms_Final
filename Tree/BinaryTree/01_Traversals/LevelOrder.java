@@ -1,4 +1,6 @@
+import java.util.ArrayList;
 import java.util.Queue;
+import java.util.List;
 
 /**
  * Definition for a binary tree node.
@@ -16,9 +18,26 @@ import java.util.Queue;
  * }
  */
 class Solution {
+    // Using DFS
+    public void  levelOrderUsingDFS(TreeNode root, int depth, List<List<Integer>> ans) {
+        if(root == null) return;
+
+        if(depth == ans.size()) {
+            // First time reaching this level, create a new list
+            ans.add(new ArrayList<>(List.of(root.val)));
+        }else {
+            // depth < ans.size() . Note depth > ans.size() is not possible
+            ans.get(depth).add(root.val);
+        }
+        // Recurse left first to maintain left-to-right order
+        levelOrderUsingDFS(root.left , depth + 1, ans);
+        levelOrderUsingDFS(root.right, depth + 1, ans);
+    }
+
+    // Using BFS ( best )
     // TC: O(n) - each node is enqueued and dequeued exactly once
     // SC: O(n) - deque holds at most O(w) nodes where w is max width (≤ n/2 for last level)
-    public List<List<Integer>> levelOrder(TreeNode root) {
+    public List<List<Integer>> levelOrderUsingBFS(TreeNode root) {
         List<List<Integer>> ans = new ArrayList<>();
 
         if (root == null) return ans;
@@ -33,17 +52,28 @@ class Solution {
 
             // Process elements of one level of the tree.
             for (int i = 0; i < levelSize; i++) {
-                TreeNode node = q.poll();
-                level.add(node.val);
+                TreeNode front = q.poll();
+                level.add(front.val);
 
                 // !enqueue children for next level only if not null.
-                if (node.left  != null) q.offer(node.left);
-                if (node.right != null) q.offer(node.right);
+                if (front.left  != null) q.offer(front.left);
+                if (front.right != null) q.offer(front.right);
             }
 
             ans.add(level);
         }
 
         return ans;
+    }
+
+
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        return levelOrderUsingBFS(root);
+
+
+        // DFS ;
+        // List<List<Integer>> ans = new ArrayList<>();
+        // levelOrderUsingDFS(root, 0, ans);
+        // return ans;
     }
 }
