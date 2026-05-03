@@ -38,7 +38,9 @@ public class Solution {
         dp[0] = 0;
         dp[1] = 1;
 
-        // step 3 : check parameter range and reverse it and run a loop
+        // step 3 : 
+        // Understand that dp[i] = dp[i-1] + dp[i-2] => For calculating current subproblem we need to calculate all previous subproblem.
+        // check parameter range and reverse it and run a loop
         // recursive approach : n --> 0
         // bottom up approach : 0 ---> n
         for (int i = 2; i <= n; i++) {
