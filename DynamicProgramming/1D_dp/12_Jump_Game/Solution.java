@@ -3,7 +3,7 @@ class Solution {
 
     // Brute
     public boolean f(int[] nums, int idx) {
-        if(idx >= nums.length) return false; // Instead of writing this base case i could have just skipped this recursive call inside loop.
+        if(idx >= nums.length) return false; // Instead of writing this base case i could have just skipped this recursive call inside loop by doing (idx + jump >= nums.length) break; -> see jump - game 2
         if(idx == nums.length - 1) return true;
 
         int num = nums[idx];

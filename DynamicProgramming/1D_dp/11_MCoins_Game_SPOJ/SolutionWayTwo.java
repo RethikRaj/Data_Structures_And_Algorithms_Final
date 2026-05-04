@@ -13,8 +13,9 @@ public class SolutionWayTwo {
 
         for (int coin = 2; coin <= c; coin++) {
             // Can take all coins in one move → W-position
+
+            // Important : Do this check otherwise our set solution in base case will be overrided and then causes us problems.
             if (coin == K || coin == L) {
-                dp[coin] = true;
                 continue;
             }
 
