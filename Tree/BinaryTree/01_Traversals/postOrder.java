@@ -1,4 +1,3 @@
-
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -14,23 +13,13 @@
  *     }
  * }
  */
-class Pair {
-    TreeNode node;
-    int numberOfTimesVisited;
-
-    Pair(TreeNode node, int numberOfTimesVisited) {
-        this.node = node;
-        this.numberOfTimesVisited = numberOfTimesVisited;
-    }
-}
-
 class Solution {
     public void f(TreeNode root, List<Integer> ans) {
         if(root == null) return;
 
         f(root.left, ans);
-        ans.add(root.val);
         f(root.right, ans);
+        ans.add(root.val);
     }
 
     public List<Integer> iterative(TreeNode root) {
@@ -38,25 +27,24 @@ class Solution {
 
         if(root == null) return ans;
 
-        Deque<Pair> stack = new ArrayDeque<>();
-        stack.push(new Pair(root, 1));
+        Deque<TreeNode> stack = new ArrayDeque<>();
+        stack.push(root);
 
         while(!stack.isEmpty()) {
-            Pair top = stack.pop();
+            TreeNode top = stack.pop();
 
-            if(top.numberOfTimesVisited == 2) {
-                ans.add(top.node.val);
-                continue;
-            }
+            ans.add(top.val);
 
-            if(top.node.right != null) stack.push(new Pair(top.node.right, 1));
-            stack.push(new Pair(top.node, 2));
-            if(top.node.left != null) stack.push(new Pair(top.node.left, 1));
+            if(top.left != null) stack.push(top.left);
+            if(top.right != null) stack.push(top.right);
         }
+
+        Collections.reverse(ans);
+        // Another way is to use LinkedList and insert at head(prepend)
         return ans;
     }
 
-    public List<Integer> inorderTraversal(TreeNode root) {
+    public List<Integer> postorderTraversal(TreeNode root) {
         // List<Integer> ans = new ArrayList<>();
         // f(root, ans);
         // return ans;

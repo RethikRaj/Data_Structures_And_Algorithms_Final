@@ -42,15 +42,13 @@ class Solution {
             TreeNode node = stack.pop();
             res.add(node.val);
 
-            // Push right first then left => Because in preorder left needs to be processed first
+            // Push right first then left => Because in preorder left needs to be processed first and we know stack is LIFO
             if(node.right != null) stack.push(node.right);
             if(node.left != null) stack.push(node.left);
         }
 
         return res;
     }
-
-
 
     public List<Integer> preorderTraversal(TreeNode root) {
         // Way 1 : Global
