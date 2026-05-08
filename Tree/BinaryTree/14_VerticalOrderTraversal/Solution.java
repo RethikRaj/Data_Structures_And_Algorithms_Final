@@ -75,49 +75,8 @@ class Solution {
         return ans;
     }
 
-    public List<List<Integer>> usingMap(TreeNode root) {
-        List<List<Integer>> ans = new ArrayList<>();
-        if(root == null) return ans;
-
-        Queue<Info> q = new ArrayDeque<>();
-        q.offer(new Info(root, 0, 0));
-
-        Map<Integer, List<Integer>> mp = new HashMap<>(); // col -> (values)
-
-        int minCol = Integer.MAX_VALUE;
-        int maxCol = Integer.MIN_VALUE;
-
-        while(!q.isEmpty()) {
-            int levelSize = q.size();
-
-            for(int i = 0; i < levelSize ; i++) {
-                Info front = q.poll();
-                
-                if(mp.containsKey(front.col)) {
-                    mp.get(front.col).add(front.node.val);
-                }else {
-                    mp.put(front.col, new ArrayList<>());
-                    mp.get(front.col).add(front.node.val);
-                }
-
-                minCol = Math.min(minCol, front.col);
-                maxCol = Math.max(maxCol, front.col);
-                
-                if(front.node.left != null) q.offer(new Info(front.node.left, front.row + 1, front.col - 1));
-                if(front.node.right != null) q.offer(new Info(front.node.right, front.row + 1, front.col + 1));
-            }
-        }
-
-        int sizeOfAns = mp.size(); // sizeOfAns = (maxCol - minCol + 1)
-
-        for(int i = minCol; i <= maxCol ; i++) {
-            Collections.sort(mp.get(i));
-            ans.add(mp.get(i));
-        }
-
-        return ans;
-    }
-
+    
+    
     public List<List<Integer>> verticalTraversal(TreeNode root) {
         // return usingPriorityQueue(root);
 
