@@ -17,7 +17,8 @@ class Solution {
             for (int i = 0; i < levelSize; i++) {
                 TreeNode front = q.poll();
 
-                // !Enqueue right before left so rightmost node is at front
+                // !Enqueue right before left so rightmost node is at front 
+                // We can also enqueue left and then right but then we need to add the last element at each level into ans.
                 if (front.right != null) q.offer(front.right);
                 if (front.left != null) q.offer(front.left);
             }

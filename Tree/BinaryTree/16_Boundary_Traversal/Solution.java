@@ -1,5 +1,3 @@
-
-
 class Solution {
     ArrayList<Integer> getLeftBoundary(Node root) {
         ArrayList<Integer> leftBoundary = new ArrayList<>();
@@ -53,10 +51,11 @@ class Solution {
         ans.add(root.data);
 
         ans.addAll(getLeftBoundary(root));
-        
-        // Why two separate calls ? Think about test case = [1]
-        getLeafBoundary(root.left, ans);
-        getLeafBoundary(root.right, ans);
+
+        // If root is itself leaf , then don't call leafBoundary since we already added root.
+        if(!(root.left == null && root.right == null)) {
+            getLeafBoundary(root, ans);
+        }
 
         ArrayList<Integer> rightBoundary = getRightBoundary(root);
         Collections.reverse(rightBoundary);
