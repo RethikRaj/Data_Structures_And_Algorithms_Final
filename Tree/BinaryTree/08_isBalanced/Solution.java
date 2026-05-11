@@ -40,9 +40,31 @@ class Solution {
         return new Info(currNodeHeight, currNodeBalanced);
     }
 
+    // Method 3 : TC : O(n), SC : O(H)
+    private boolean valid;
+    // Returns height of tree rooted at root;
+    private int z(TreeNode root) {
+        if(root == null) return 0;
+        if(!valid) return -1; // early exit . -1 is just a sentinel it doesn't hold a meaning
+
+        int lh = z(root.left);
+        int rh = z(root.right);
+        
+        if(Math.abs(lh - rh) > 1) {
+            valid = false;
+        }
+
+        return 1 + Math.max(lh, rh);
+    }
+     
+
     public boolean isBalanced(TreeNode root) {
         // return f(root);
 
-        return g(root).isBalanced;
+        // return g(root).isBalanced;
+
+        valid = true;
+        z(root);
+        return valid;
     }
 }
