@@ -27,7 +27,7 @@ class Solution {
         TreeNode curr = root;
         while(curr != null) {
             if(curr.val == val) {
-                break;
+                return curr;
             }else if(curr.val < val) {
                 curr = curr.right;
             }else {
