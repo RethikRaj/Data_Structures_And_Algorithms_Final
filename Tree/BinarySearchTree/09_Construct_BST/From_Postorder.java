@@ -10,7 +10,7 @@ class Solution {
         Node root = new Node(element);
         postorderIndex -= 1;
         
-        // ! first build right sub tree, then left sub tree -> Why ? do dry run
+        // ! first build right sub tree, then left sub tree -> Why ? we are doing reverse postorder ( or do dry run)
         root.right = buildBST(postorder, element, upperRange);
         root.left = buildBST(postorder, lowerRange, element);
         
