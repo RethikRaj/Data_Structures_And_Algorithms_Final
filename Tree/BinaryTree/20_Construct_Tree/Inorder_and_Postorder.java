@@ -15,6 +15,7 @@ class Solution {
         // Find where this root sits in the inorder traversal
         int inorderIndex = inorderMap.get(element);
 
+        // ! first build right sub tree, then left sub tree -> Why ? do dry run
         // R - Elements to the right of inorderIndex in inorder belong to the right subtree
         root.right = buildTreeUtil(postorder, inorderIndex + 1, inorderEnd, inorderMap);
         // L - Elements to the left of inorderIndex in inorder belong to the left subtree
