@@ -15,7 +15,7 @@ public class MorrisTraversals {
                 curr = curr.right;
             } else {
                 // Check whether left part already traversed or not
-                // No link exists -> not  traversed(1st time visit) -> link the rightmost node in left sub tree to curr and move to curr node's left sub tree.
+                // No link exists -> not  traversed(1st time visit) -> link the rightmost node in left sub tree(inorder predecessor) to curr and move to curr node's left sub tree.
                 // link exists -> already traversed(2nd time visit) - remove link , process curr node, move to curr node's right sub tree;
 
                 TreeNode temp = curr.left;
