@@ -50,7 +50,7 @@ class Solution {
 
                     visited.put(nbr.val, cloneNbr);
                 }else {
-                    fNew.neighbors.add(visited.get(nbr.val));
+                    fNew.neighbors.add(visited.get(nbr.val)); // reuse already-cloned node
                 }
             }
         }
