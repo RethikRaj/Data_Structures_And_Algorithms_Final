@@ -16,10 +16,11 @@ class Solution {
         int m = heights.length;
         int n = heights[0].length;
 
+        // Step 1 :
         Queue<Pair> q = new ArrayDeque<>();
         boolean[][] visited = new boolean[m][n];
 
-        // Initilaize mutiple sources
+        // Step 2 : Seed queue with the ocean's border cells as sources (top+left for Pacific, bottom+right for Atlantic)
         if(ocean.equals("Pacific")) {
             for(int col = 0; col < n; col++) {
                 q.offer(new Pair(0, col));
@@ -43,7 +44,7 @@ class Solution {
         }
         
 
-        // 
+        // Step 3 :
         while(!q.isEmpty()) {
             Pair front = q.poll();
 
