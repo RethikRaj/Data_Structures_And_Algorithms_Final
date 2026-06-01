@@ -20,7 +20,7 @@ class Pair {
 
     @Override
     public int hashCode() {
-        return Objects.hash(row, col);
+        return Objects.hash(this.row, this.col);
     }
 }
 
