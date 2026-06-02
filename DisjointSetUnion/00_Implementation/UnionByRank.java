@@ -1,3 +1,4 @@
+import java.util.Scanner;
 
 class DSUbyRank {
     int n;
@@ -39,6 +40,32 @@ class DSUbyRank {
 }
 
 public class UnionByRank {
-    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt();
+
+        DSUbyRank dsu = new DSUbyRank(n);
+
+        while(true) {
+            String input = sc.next();
+
+            if(input.equals("exit")) break;
+
+            if(input.equals("Union")) {
+                int a = sc.nextInt();
+                int b = sc.nextInt();
+
+                dsu.union(a, b);
+            }else if(input.equals("Find")) {
+                int x = sc.nextInt();
+                System.out.println(dsu.find(x));
+            }else {
+                System.out.println("Invalid op");
+            }
+        }
+
+        sc.close();
+    }
 }
 
