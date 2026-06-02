@@ -1,11 +1,12 @@
-import java.util.* ;
-import java.io.*; 
-public class Solution {
-    private static ArrayList<Integer> multiSourceBFS(ArrayList<ArrayList<Integer>> graph, int[] indegreeMap) {
+class Solution {
+    private int[] multiSourceBFS(ArrayList<ArrayList<Integer>> graph, int[] indegreeMap) {
+        int V = indegreeMap.length;
+
         Queue<Integer> q = new ArrayDeque<>();
         Set<Integer> visited = new HashSet<>();
 
-        ArrayList<Integer> result = new ArrayList<>();
+        int[] result = new int[V];
+        int idx = 0;
 
         for(int i = 0; i < indegreeMap.length; i++) {
             if(indegreeMap[i] == 0) {
@@ -17,7 +18,7 @@ public class Solution {
         while(!q.isEmpty()) {
             int front = q.poll();
 
-            result.add(front);
+            result[idx++] = front;
 
             // Adjacent
             for(int nbr : graph.get(front)) {
@@ -32,24 +33,28 @@ public class Solution {
             }
         }
 
-        return result;
+        // Check for cycle.
+        return visited.size() == V ? result : new int[0];
     }
 
-    public static ArrayList<Integer> topologicalSort(ArrayList<ArrayList<Integer>> edges, int v, int e) {
-        int[] indegreeMap = new int[v];
-        ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
-        for(int i = 0; i < v; i++) graph.add(new ArrayList<>());
+    public int[] findOrder(int numCourses, int[][] prerequisites) {
+        int V = numCourses;
 
-        for(ArrayList<Integer> edge : edges) {
-            int src = edge.get(0);
-            int dest = edge.get(1);
+        int[] indegreeMap = new int[V];
+
+        // Constructing a directed graph
+        ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
+        for(int i = 0; i < V; i++) graph.add(new ArrayList<>());
+        for(int[] edge : prerequisites) {
+            int src = edge[1]; // bi
+            int dest = edge[0]; // ai
             indegreeMap[dest] += 1;
             
             graph.get(src).add(dest);
         }
 
-        // Apply mutlti souce bfs with nodes having indegree as 0;
-        ArrayList<Integer> result = multiSourceBFS(graph, indegreeMap);
+        int[] result = multiSourceBFS(graph, indegreeMap);
+
         return result;
     }
 }
