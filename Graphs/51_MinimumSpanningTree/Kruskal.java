@@ -1,15 +1,3 @@
-import java.io.*;
-import java.math.*;
-import java.security.*;
-import java.text.*;
-import java.util.*;
-import java.util.concurrent.*;
-import java.util.function.*;
-import java.util.regex.*;
-import java.util.stream.*;
-import static java.util.stream.Collectors.joining;
-import static java.util.stream.Collectors.toList;
-
 class Edge {
     int src;
     int dest;
@@ -50,12 +38,12 @@ class Result {
 
     public static int kruskals(int gNodes, List<Integer> gFrom, List<Integer> gTo, List<Integer> gWeight) {
         PriorityQueue<Edge> pq = new PriorityQueue<>((e1, e2) -> e1.wt - e2.wt);
-        
+        // O(E logE)
         for(int i = 0 ; i < gFrom.size(); i++) {
             pq.add(new Edge(gFrom.get(i), gTo.get(i), gWeight.get(i)));
         }
         
-        // Initialize DSU
+        // Initialize DSU : O(V)
         par = new int[gNodes + 1];
         size = new int[gNodes + 1];
         // Vertices are 1 based -> V lies in range [1, gNodes]            
@@ -65,22 +53,32 @@ class Result {
         }
         
         // Number of edges in MST = V - 1
-        int requiredEdges = gNodes - 1;
-        int totalWeight = 0;
-        
-        while(requiredEdges > 0 && !pq.isEmpty()) {
+        int edgeCountInSpanningTree = 0;
+        int minCost = 0;
+    
+        while(edgeCountInSpanningTree < gNodes - 1 && !pq.isEmpty()) { // while loop in worst case runs for O(E) times , not O(V).
             Edge front = pq.poll();
             
-            // Checking whether including this edge causes a cycle or not .
-            boolean causesCycle = union(front.src, front.dest);
+            // Way 1 to check cycle 
+            boolean causesCycle = union(front.src, front.dest); // O(log*n)
             
             if(causesCycle) continue;
             else {
-                totalWeight += front.wt;
-                requiredEdges -= 1;
+                minCost += front.wt;
+                edgeCountInSpanningTree += 1;
             }
+            
+            // Way 2 to check cycle . Notice in union() i pass leaders so even if 4 find calls happen but the last 2 find calls will be O(1) since we pass leaders.
+            // int leader_src = find(front.src);
+            // int leader_dest = find(front.dest);
+            
+            // if(leader_src == leader_dest) continue; // including it will cause cycle
+            // else {
+            //     minCost += front.wt;
+            //     edgeCountInSpanningTree += 1;
+            //     union(leader_src, leader_dest);
+            // }
         }
-        return totalWeight;
+        return edgeCountInSpanningTree == gNodes - 1 ? minCost : -1; // -1 --> NO spanning Tree possible
     }
 }
-
