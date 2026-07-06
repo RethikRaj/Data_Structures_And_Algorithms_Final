@@ -41,6 +41,8 @@ class Solution {
         return false;
     }
 
+    // Method 3 : DSU -> See DSUSolution.java
+
     public boolean validPath(int n, int[][] edges, int source, int destination) {
         // Step 1 : Construct adjacency list from edge list
         List<List<Integer>> graph = new ArrayList<>();
