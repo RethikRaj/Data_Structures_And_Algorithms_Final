@@ -55,7 +55,7 @@ class Solution {
         // Method 2 : dfs without using visited
         for(int i = 0; i < m; i++) {
             for(int j = 0; j < n; j++) {
-                if(grid[i][j] == '1' && grid[i][j] != '2') { // grid[i][j] != '2' is nothing but visited or not check
+                if(grid[i][j] == '1') { // No need to extra check grid[i][j] != '2' becuase it is already implied
                     count += 1;
                     dfs_2(grid, i, j);
                 }

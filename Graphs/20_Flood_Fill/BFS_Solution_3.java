@@ -1,5 +1,6 @@
 // BFS + (using given matrix itself as visited)
- /*Key Insight: No separate visited array needed!
+ /*
+ * Key Insight: No separate visited array needed!
  *   → We recolor each cell as soon as we dequeue it.
  *   → Recolored cells no longer match originalColor, so they'll never be enqueued again — the matrix itself acts as visited.
  *   → Thus checking image[adjRow][adjCol] == originalColor inherently also checks visited[ajRow][adjCol] == false.
@@ -10,10 +11,11 @@
  *     get enqueued forever → infinite loop.
  */
 
-class Pair {
+class Vertex {
     int row;
     int col;
-    Pair(int row, int col) {
+
+    Vertex(int row, int col) {
         this.row = row;
         this.col = col;
     }
@@ -21,35 +23,36 @@ class Pair {
 
 class Solution {
     private static final int[] DELTA_ROW = {-1, 1, 0, 0};
-    private static final int[] DELTA_COL = { 0, 0, -1, 1};
+    private static final int[] DELTA_COL = {0, 0, -1, 1};
 
     private void bfs(int[][] image, int sr, int sc, int color) {
         int m = image.length;
         int n = image[0].length;
 
         int originalColor = image[sr][sc];
-        if(originalColor == color) return; // Early exit (MUST)
+        if (originalColor == color) return; // Early exit (MUST)
 
-        Queue<Pair> q = new ArrayDeque<>();
+        Queue<Vertex> q = new ArrayDeque<>();
+        q.offer(new Vertex(sr, sc));
 
-        Pair src = new Pair(sr, sc);
-        q.offer(src);
-
-        while(!q.isEmpty()) {
-            Pair front = q.poll();
+        while (!q.isEmpty()) {
+            Vertex front = q.poll();
 
             image[front.row][front.col] = color;
 
-            // Explore adjacents            
-            for(int i = 0; i < DELTA_ROW.length;i++) {
+            // Explore adjacent cells
+            for (int i = 0; i < 4; i++) {
                 int adjRow = front.row + DELTA_ROW[i];
                 int adjCol = front.col + DELTA_COL[i];
 
-                Pair temp = new Pair(adjRow, adjCol);
+                // !Used early continue instead of deeply nested and conditions
+                if (adjRow < 0 || adjCol < 0 || adjRow >= m || adjCol >= n)
+                    continue;
 
-                if(adjRow < m && adjCol < n && adjRow >= 0 && adjCol >= 0 && image[adjRow][adjCol] == originalColor) {
-                    q.offer(temp);
-                }
+                if (image[adjRow][adjCol] != originalColor)
+                    continue;
+
+                q.offer(new Vertex(adjRow, adjCol));
             }
         }
     }

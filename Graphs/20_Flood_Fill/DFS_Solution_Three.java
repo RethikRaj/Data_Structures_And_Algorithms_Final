@@ -13,9 +13,17 @@ class Solution {
             int adjRow = currRow + DELTA_ROW[i];
             int adjCol = currCol + DELTA_COL[i];
 
-            if(adjRow >= 0 && adjRow < image.length && adjCol >= 0 && adjCol < image[0].length && image[adjRow][adjCol] == originalColor) {
-                dfs(image, adjRow, adjCol, originalColor, newColor);
-            }
+            // Method 2 : 
+            if (adjRow < 0 || adjCol < 0 || adjRow >= image.length || adjCol >= image[0].length) continue;
+
+            if (image[adjRow][adjCol] != originalColor) continue;
+
+            dfs(image, adjRow, adjCol, originalColor, newColor);
+
+            // Method 1 : Using and conditions -> Not readable
+            // if(adjRow >= 0 && adjRow < image.length && adjCol >= 0 && adjCol < image[0].length && image[adjRow][adjCol] == originalColor) {
+            //     dfs(image, adjRow, adjCol, originalColor, newColor);
+            // }
         }
     }
 
