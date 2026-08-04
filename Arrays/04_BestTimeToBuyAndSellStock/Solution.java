@@ -58,7 +58,7 @@ class Solution {
         int n = prices.length;
 
         int maxProfit = 0;
-        int maxSellingPrice = prices[n-1]; // Denotes the maximum price seen so far
+        int maxSellingPrice = prices[n-1]; // Denotes the maximum price seen so far ( to the right )
         for(int buyDay = n - 2; buyDay >= 0 ; buyDay--) {
             // Update maxProfit
             int currProfit = maxSellingPrice - prices[buyDay];

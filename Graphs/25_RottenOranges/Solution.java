@@ -1,8 +1,8 @@
-class Pair {
+class Vertex {
     int row;
     int col;
 
-    Pair(int row, int col) {
+    Vertex(int row, int col) {
         this.row = row;
         this.col = col;
     }
@@ -20,7 +20,7 @@ class Solution {
         int n = grid[0].length;
 
         // Step 1 : 
-        Queue<Pair> q = new ArrayDeque<>();
+        Queue<Vertex> q = new ArrayDeque<>();
 
         // Step 2 : Initialize source
         int freshOrangeCount = 0; // counting fresh orange;
@@ -30,7 +30,7 @@ class Solution {
                     freshOrangeCount += 1;
                 }
                 if(grid[i][j] == 2) {
-                    q.offer(new Pair(i, j));
+                    q.offer(new Vertex(i, j));
                 }
             }
         }
@@ -44,7 +44,7 @@ class Solution {
             int levelSize = q.size();
 
             for(int i = 0; i < levelSize; i++) {
-                Pair front = q.poll();
+                Vertex front = q.poll();
 
                 // Adjacents
                 for(int j = 0; j < 4; j++) {
@@ -56,7 +56,7 @@ class Solution {
                         ) {
                         freshOrangeCount -= 1;
                         grid[adjRow][adjCol] = 2;
-                        q.offer(new Pair(adjRow, adjCol));
+                        q.offer(new Vertex(adjRow, adjCol));
                     }
                 }
             }

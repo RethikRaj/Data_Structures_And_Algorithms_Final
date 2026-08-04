@@ -58,6 +58,22 @@ class Solution {
         return maxCount;
     }
 
+    public int best2(int[] nums) {
+        int maximum = 0;
+        int start = 0;
+
+        int i = 0 ;
+        for(; i < nums.length; i++) {
+            if(nums[i] != 1) {
+                maximum = Math.max(maximum, i - start);
+                start = i + 1;
+            }
+        }
+
+        maximum = Math.max(maximum, i - start);
+        return maximum;
+    }
+
     public int findMaxConsecutiveOnes(int[] nums) {
         // return brute(nums);
         return best(nums);
